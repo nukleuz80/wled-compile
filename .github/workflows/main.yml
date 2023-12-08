@@ -28,7 +28,7 @@ jobs:
         cd `cat /tmp/WLEDtemp/wledfoldername`
         echo '[env:custom_build]' >>platformio.ini
         echo 'extends = env:d1_mini' >>platformio.ini
-        echo 'build_flags = ${env:d1_mini.build_flags} -D USERMOD_MULTI_RELAY' >>platformio.ini
+        echo 'build_flags = ${env:d1_mini.build_flags} -D USERMOD_MULTI_RELAY -D USERMOD_PIRSWITCH' >>platformio.ini
         
         pio run -e custom_build || pio run -e custom_build
     - name: Copy Files
