@@ -27,10 +27,10 @@ jobs:
         find /tmp/WLEDtemp -maxdepth 1 -mindepth 1 -name "*" -type d >> /tmp/WLEDtemp/wledfoldername
         cd `cat /tmp/WLEDtemp/wledfoldername`
         echo '[env:custom_build]' >>platformio.ini
-        echo 'extends = env:nodemcuv2' >>platformio.ini
-        echo 'build_flags = ${env:nodemcuv2.build_flags} -D USERMOD_AUDIOREACTIVE -D USERMOD_MULTI_RELAY -D USERMOD_PIRSWITCH' >>platformio.ini
+        echo 'extends = env:esp32dev' >>platformio.ini
+        echo 'build_flags = ${env:esp32dev.build_flags} -D USERMOD_AUDIOREACTIVE -D USERMOD_MULTI_RELAY -D USERMOD_PIRSWITCH' >>platformio.ini
         echo 'lib_deps = ' >>platformio.ini
-        echo '  ${env:nodemcuv2.lib_deps}' >>platformio.ini
+        echo '  ${env:esp32dev.lib_deps}' >>platformio.ini
         echo '  https://github.com/blazoncek/arduinoFFT.git' >>platformio.ini
         
         pio run -e custom_build || pio run -e custom_build
