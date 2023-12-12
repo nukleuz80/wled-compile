@@ -22,13 +22,16 @@ jobs:
       run: |
         rm -rf /tmp/WLEDtemp/* || true
         mkdir -p /tmp/WLEDtemp
-        wget https://github.com/moonmodules/WLED/archive/refs/heads/mdev.zip -O /tmp/WLEDtemp/mm.zip
+        wget https://github.com/Aircoookie/WLED/archive/refs/heads/main.zip -O /tmp/WLEDtemp/mm.zip
         unzip /tmp/WLEDtemp/mm.zip -d /tmp/WLEDtemp
         find /tmp/WLEDtemp -maxdepth 1 -mindepth 1 -name "*" -type d >> /tmp/WLEDtemp/wledfoldername
         cd `cat /tmp/WLEDtemp/wledfoldername`
         echo '[env:custom_build]' >>platformio.ini
-        echo 'extends = env:d1_mini' >>platformio.ini
-        echo 'build_flags = ${env:d1_mini.build_flags} -D USERMOD_MULTI_RELAY -D USERMOD_PIRSWITCH' >>platformio.ini
+        echo 'extends = env:nodemcuv2' >>platformio.ini
+        echo 'build_flags = ${env:nodemcuv2.build_flags} -D USERMOD_AUDIOREACTIVE -D USERMOD_MULTI_RELAY -D USERMOD_PIRSWITCH' >>platformio.ini
+        echo 'lib_deps = ' >>platformio.ini
+        echo '  ${env:nodemcuv2.lib_deps}' >>platformio.ini
+        echo '  https://github.com/blazoncek/arduinoFFT.git' >>platformio.ini
         
         pio run -e custom_build || pio run -e custom_build
     - name: Copy Files
