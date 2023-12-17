@@ -28,10 +28,12 @@ jobs:
         cd `cat /tmp/WLEDtemp/wledfoldername`
         echo '[env:custom_build]' >>platformio.ini
         echo 'extends = env:esp32dev' >>platformio.ini
-        echo 'build_flags = ${env:esp32dev.build_flags} -D USERMOD_AUDIOREACTIVE -D USERMOD_MULTI_RELAY -D USERMOD_PIRSWITCH' >>platformio.ini
+        echo 'build_flags = ${env:esp32dev.build_flags} -D WLED_DISABLE_ESPNOW -D USERMOD_AUDIOREACTIVE -D USERMOD_ANALOG_CLOCK -D USERMOD_BME280' >>platformio.ini
         echo 'lib_deps = ' >>platformio.ini
         echo '  ${env:esp32dev.lib_deps}' >>platformio.ini
         echo '  https://github.com/blazoncek/arduinoFFT.git' >>platformio.ini
+        echo '  BME280@~3.0.0' >>platformio.ini
+        echo '  Wire' >>platformio.ini
         
         pio run -e custom_build || pio run -e custom_build
     - name: Copy Files
